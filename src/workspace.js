@@ -484,12 +484,6 @@ module.exports = class Workspace extends Model {
     }
   }
 
-  setDraggingItem (draggingItem) {
-    _.values(this.paneContainers).forEach(dock => {
-      dock.setDraggingItem(draggingItem)
-    })
-  }
-
   subscribeToAddedItems () {
     this.onDidAddPaneItem(({item, pane, index}) => {
       if (item instanceof TextEditor) {
