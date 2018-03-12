@@ -36,8 +36,7 @@ class DockGroup {
           $.div(
             {style: {overflow: 'hidden', flex: 1 / items.length}},
             // TODO: Put a header here for vertical docks only?
-            //$(ElementComponent, {key: item, element: atom.views.getView(item)})
-            item.getTitle()
+            $(ElementComponent, {key: item, element: atom.views.getView(item)})
           )
         ),
         index => $('atom-dock-group-divider', {className: this.props.orientation})

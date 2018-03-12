@@ -24,7 +24,7 @@ class DockGroupContainer {
   render () {
     return $(
       'atom-dock-group-container',
-      {style: {flex: 1}},
+      {style: {flex: 1, minWidth: 0, minHeight: 0}},
       $(DockGroup, {
         key: this.state.activePane,
         orientation: this.props.orientation,

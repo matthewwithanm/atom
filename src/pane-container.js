@@ -18,9 +18,11 @@ class PaneContainer {
     this.alive = true
     this.stoppedChangingActivePaneItemTimeout = null
 
-    this.setRoot(new Pane({container: this, config: this.config, applicationDelegate, notificationManager, deserializerManager, viewRegistry: this.viewRegistry}))
+    this.setRoot(this.createPane({container: this, config: this.config, applicationDelegate, notificationManager, deserializerManager, viewRegistry: this.viewRegistry}))
     this.didActivatePane(this.getRoot())
   }
+
+  createPane (options) { return new Pane(options) }
 
   getLocation () { return this.location }
 

@@ -1,7 +1,7 @@
 const etch = require('etch')
 const {CompositeDisposable, Emitter} = require('event-kit')
 const DockGroupContainer = require('./dock-group-container')
-const PaneContainer = require('./pane-container')
+const DockPaneContainer = require('./dock-pane-container')
 const TextEditor = require('./text-editor')
 const Grim = require('grim')
 
@@ -34,7 +34,7 @@ module.exports = class Dock {
 
     this.emitter = new Emitter()
 
-    this.paneContainer = new PaneContainer({
+    this.paneContainer = new DockPaneContainer({
       location: this.location,
       config: this.config,
       applicationDelegate: this.applicationDelegate,
