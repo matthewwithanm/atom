@@ -1,5 +1,6 @@
 const etch = require('etch')
 const {CompositeDisposable, Emitter} = require('event-kit')
+const DockGroupContainer = require('./dock-group-container')
 const PaneContainer = require('./pane-container')
 const TextEditor = require('./text-editor')
 const Grim = require('grim')
@@ -168,9 +169,22 @@ module.exports = class Dock {
         onResizeToFit: this.handleResizeToFit,
         dockIsVisible: this.state.visible
       }),
-      $(ElementComponent, {element: this.paneContainer.getElement()}),
+      $(
+        DockGroupContainer,
+        {orientation: this.getOrientation(), paneContainer: this.paneContainer}
+      ),
       $.div({className: cursorOverlayElementClassList.join(' ')})
     )
+  }
+
+  getOrientation () {
+    switch (this.getLocation()) {
+      case 'left':
+      case 'right':
+        return 'vertical'
+      default:
+        return 'horizontal'
+    }
   }
 
   update (props) {
@@ -571,18 +585,6 @@ class DockResizeHandle {
     } else if (this.props.dockIsVisible) {
       this.props.onResizeStart()
     }
-  }
-}
-
-// An etch component that doesn't use etch, this component provides a gateway from JSX back into
-// the mutable DOM world.
-class ElementComponent {
-  constructor (props) {
-    this.element = props.element
-  }
-
-  update (props) {
-    this.element = props.element
   }
 }
 
