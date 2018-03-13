@@ -53,7 +53,9 @@ class PaneContainer {
     if (state.version !== SERIALIZATION_VERSION) return
     this.itemRegistry = new ItemRegistry()
     this.setRoot(deserializerManager.deserialize(state.root))
-    this.activePane = find(this.getRoot().getPanes(), pane => pane.id === state.activePaneId) || this.getPanes()[0]
+    this.didActivatePane(
+      find(this.getRoot().getPanes(), pane => pane.id === state.activePaneId) || this.getPanes()[0]
+    )
     if (this.config.get('core.destroyEmptyPanes')) this.destroyEmptyPanes()
   }
 
